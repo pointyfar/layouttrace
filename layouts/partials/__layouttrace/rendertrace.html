@@ -1,0 +1,11 @@
+{{ $styletrace := resources.Get "scss/layouttrace.scss" | resources.ToCSS }}
+<style>
+    {{ $styletrace.Content | safeCSS }}
+</style>
+
+<div id="displaytrace">
+</div>
+
+<script>
+    rendertrace(layouttraceresult, "displaytrace")
+</script>

@@ -1,0 +1,17 @@
+{{ $ltrace := resources.Get "js/layouttrace.js" | resources.Fingerprint }}
+{{ $rtrace := resources.Get "js/rendertrace.js" | resources.Fingerprint }}
+
+<script src="{{$ltrace.Permalink}}"></script>
+<script src="{{$rtrace.Permalink}}"></script>
+<script>
+
+    let trace = ({{ delimit (.Scratch.Get "trace") "," }})
+                .split(",")
+                .map(x=> x.slice(1,-1));
+    
+    let layouttraceresult = layouttrace(trace);
+    console.log("Begin Layout Trace Results")
+    console.log(layouttraceresult)
+    console.log("End Layout Trace Results")
+
+</script>
